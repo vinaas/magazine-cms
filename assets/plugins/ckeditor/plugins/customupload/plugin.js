@@ -50,8 +50,8 @@ CKEDITOR.plugins.add('customupload', {
             }).then(res => {
               rec = res.result.files.upload[0]
               var img = document.createElement('img')
+              var url = this._.editor.config.downloadUrl + '/' + rec.name
               console.log('this', this, dialog)
-              var url = this._.editor.config.uploadUrl.replace('upload', 'download') + '/' + rec.name
               img.setAttribute('src', url)
               img.style.height = '200px'
               img.style.width = '200px'
@@ -72,7 +72,7 @@ CKEDITOR.plugins.add('customupload', {
           var iframe = el.$.querySelector('iframe')
           var file = $(iframe).contents().find('input')[0]
           var img = editor.document.createElement('img');
-          var url = this._.editor.config.uploadUrl.replace('upload', 'download') + '/' + file.files[0].name
+          var url = this._.editor.config.downloadUrl + '/' + file.files[0].name
           img.setAttribute('src', url)
           editor.insertElement(img);
         }

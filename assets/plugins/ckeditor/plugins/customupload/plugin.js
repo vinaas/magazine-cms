@@ -37,15 +37,6 @@ CKEDITOR.plugins.add('customupload', {
           var iframe = el.$.querySelector('iframe')
           var file = $(iframe).contents().find('input')[0]
           file.setAttribute('accept', 'image/*')
-          
-          var img = document.createElement('img')
-          img.setAttribute('src', '')
-          if (el.$.querySelector('img')) {
-            el.$.replaceChild(img, el.$.querySelector('img'))
-          } else {
-            el.$.insertBefore(img, el.$.lastChild);
-          }
-          
           file.addEventListener("change", () => {
             var uploadUrl = this._.editor.config.uploadUrl
             file.setAttribute('disabled', 'disabled')
@@ -60,10 +51,10 @@ CKEDITOR.plugins.add('customupload', {
               rec = res.result.files.upload[0]
               var img = document.createElement('img')
               var url = this._.editor.config.downloadUrl + '/' + rec.name
-              //console.log('this', this, dialog)
+              console.log('this', this, dialog)
               img.setAttribute('src', url)
               img.style.height = '200px'
-              img.style.width = '300px'
+              img.style.width = '200px'
 
               if (el.$.querySelector('img')) {
                 el.$.replaceChild(img, el.$.querySelector('img'))
@@ -80,14 +71,10 @@ CKEDITOR.plugins.add('customupload', {
           var el = dialog.getContentElement('tab-basic', 'uploadImage').getElement()
           var iframe = el.$.querySelector('iframe')
           var file = $(iframe).contents().find('input')[0]
-          // var img = editor.document.createElement('img');
+          var img = editor.document.createElement('img');
           var url = this._.editor.config.downloadUrl + '/' + file.files[0].name
-          // img.setAttribute('src', url)
-          // img.setAttribute('height', 300)
-          // img.setAttribute('width', 400)
-          // img.setAttribute('alt', '')
-          console.log('image url ', url)
-          editor.insertHtml( '<img src="' + url + '" />');  //để phối hợp với Enhanced Image
+          img.setAttribute('src', url)
+          editor.insertElement(img);
         }
       };
     });
